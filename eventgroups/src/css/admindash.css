@@ -1,10 +1,26 @@
 .header {
-    background-color: #1877f2;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
+    background-color: rgb(63, 140, 211);
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#fff;
+}
+.header .title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.header .logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.header .logout-button:hover {
+    background-color: #c82333;
 }
 .container {
     width: 80%;
@@ -12,13 +28,12 @@
     padding: 20px;
 }
 .event {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
+    background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 20px;
+            align-items: center;
 }
 .event img {
     border-radius: 8px;
@@ -47,6 +62,7 @@
 .event-actions {
     display: flex;
     align-items: center;
+    
 }
 .event-actions button {
     background-color: #1877f2;
@@ -82,12 +98,15 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 5px;
 }
 .admin-actions button:hover {
     background-color: #218838;
+
 }
 .admin-actions button.delete {
     background-color: #dc3545;
+    margin: 5px;
 }
 .admin-actions button.delete:hover {
     background-color: #c82333;
