@@ -19,7 +19,7 @@ const EventList = ({ initialEvents = [] }) => {
     };
 
     const handleShowMore = () => {
-        setVisibleCount(visibleCount + 6); 
+        setVisibleCount(visibleCount + 5); 
     };
 
     return (
