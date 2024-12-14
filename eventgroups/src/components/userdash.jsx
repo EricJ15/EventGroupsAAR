@@ -68,13 +68,24 @@ const EventList = () => {
                     <li key={event.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                         <img 
                             src={event.imageUrl} 
-                            alt={event.title}
+                            alt={event.title} 
                             style={{ width: '50px', height: '50px', borderRadius: '4px', marginRight: '10px' }} 
                         />
                         <span style={{ flex: 1 }}>{event.title}</span>
                         <div>
-                            <button onClick={() => handleToggleInterest(event.id)}>
-                                {interestedEvents.has(event.id) ? 'Uninterested' : 'Interested'}
+                            <button 
+                                onClick={() => handleToggleInterest(event.id)}
+                                style={{
+                                    backgroundColor: interestedEvents.has(event.id) ? '#0bf588' : '#ff4d4d', // Green if interested, red if uninterested
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    padding: '10px 15px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s'
+                                }}
+                            >
+                                {interestedEvents.has(event.id) ? 'Interested' : 'Uninterested'}
                             </button>
                         </div>
                     </li>
