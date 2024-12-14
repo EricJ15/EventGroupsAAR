@@ -1,10 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../firebase/config';
 import '../css/userdash.css';
 
-const EventList = ({ initialEvents = [] }) => {
-    const [events, setEvents] = useState(initialEvents);
+const EventList = () => {
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [visibleCount, setVisibleCount] = useState(5); 
     const [interestedEvents, setInterestedEvents] = useState(new Set());
+
+    useEffect(() => {
+        const eventsRef = ref(db, 'events');
+
+        const unsubscribe = onValue(eventsRef, (snapshot) => {
+            setLoading(true);
+            setError(null);
+            try {
+                if (snapshot.exists()) {
+                    const eventsData = snapshot.val();
+                    const eventsList = Object.entries(eventsData)
+                        .map(([id, data]) => ({ id, ...data }))
+                        .filter(event => event.isPublic === true);
+                    
+                    // Sort events by date in descending order
+                    eventsList.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    setEvents(eventsList);
+                } else {
+                    setEvents([]);
+                }
+            } catch (error) {
+                setError('Failed to fetch events. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        // Cleanup subscription
+        return () => unsubscribe();
+    }, []);
 
     const handleToggleInterest = (eventId) => {
         setInterestedEvents(prev => {
@@ -27,6 +61,8 @@ const EventList = ({ initialEvents = [] }) => {
             <div className="event-list-header">
                 <h2>Available Events</h2>
             </div>
+            {loading && <div className="loading">Loading events...</div>}
+            {error && <div className="error-message">{error}</div>}
             <ul>
                 {events.slice(0, visibleCount).map(event => (
                     <li key={event.id}>
