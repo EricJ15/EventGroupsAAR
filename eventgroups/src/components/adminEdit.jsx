@@ -1,63 +1,100 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/adminEdit.css';
+import React, { useState } from 'react';
+import { ref, update } from 'firebase/database';
+import { db } from '../firebase/config';
+import '../css/modal.css';
 
-export const AdminEdit = () => {
-  const navigate = useNavigate(); // Hook to handle navigation
+export default function AdminEdit({ isOpen, onClose, event }) {
+  const [formData, setFormData] = useState({
+    title: event.title,
+    description: event.description,
+    date: event.date,
+    imageUrl: event.imageUrl || '',
+    isPublic: event.isPublic
+  });
 
-  const handleCancel = () => {
-    navigate('/'); // Navigate back to AdminDash
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const eventRef = ref(db, `events/${event.id}`);
+      await update(eventRef, formData);
+      onClose();
+    } catch (error) {
+      console.error("Error updating event: ", error);
+      alert('Failed to update event. Please try again.');
+    }
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <div>
-      <div className="header">
-        <h1>Edit Event</h1>
-        <button>Log Out</button>
-      </div>
-      <div className="container">
-        <div className="form-container">
-          <h2>Edit Event Details</h2>
-          <form>
-            <div className="form-group">
-              <label htmlFor="event-title">Event Title</label>
-              <input type="text" id="event-title" name="event-title" defaultValue="Music Concert" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="event-description">Event Description</label>
-              <textarea
-                id="event-description"
-                name="event-description"
-                rows="4"
-                defaultValue="Join us for an evening of live music and entertainment."
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="event-date">Event Date</label>
-              <input type="date" id="event-date" name="event-date" defaultValue="2023-12-25" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="event-image">Event Image URL</label>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="modal-close" onClick={onClose}>&times;</button>
+        <h2>Edit Event</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Date:</label>
+            <input
+              type="text"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Image URL:</label>
+            <input
+              type="text"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>
               <input
-                type="text"
-                id="event-image"
-                name="event-image"
-                defaultValue="https://storage.googleapis.com/a1aa/image/EnBnyzhSRoZKMNuvTCAfZY5QFt1yTYeBhUOM7491aJhuGa6TA.jpg"
+                type="checkbox"
+                name="isPublic"
+                checked={formData.isPublic}
+                onChange={handleChange}
               />
-            </div>
-            <div className="form-actions">
-              <button type="submit" className="save-btn">
-                Save
-              </button>
-              <button type="button" className="cancel-btn" onClick={handleCancel}>
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
+              Public Event
+            </label>
+          </div>
+          <div className="form-actions">
+            <button type="submit" className="save-btn">Save Changes</button>
+            <button type="button" onClick={onClose} className="cancel-btn">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
   );
-};
-
-export default AdminEdit;
+}
