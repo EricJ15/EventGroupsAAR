@@ -76,7 +76,7 @@ const EventList = () => {
                             <button 
                                 onClick={() => handleToggleInterest(event.id)}
                                 style={{
-                                    backgroundColor: interestedEvents.has(event.id) ? '#0bf588' : '#ff4d4d', // Green if interested, red if uninterested
+                                    backgroundColor: interestedEvents.has(event.id) ? '#ff4d4d' : '#0bf588', // Red if "Remove Interest", Green if "Interested"
                                     color: 'white',
                                     border: 'none',
                                     borderRadius: '4px',
@@ -85,7 +85,7 @@ const EventList = () => {
                                     transition: 'background-color 0.3s'
                                 }}
                             >
-                                {interestedEvents.has(event.id) ? 'Interested' : 'Uninterested'}
+                                {interestedEvents.has(event.id) ? 'Remove Interest' : 'Interested'}
                             </button>
                         </div>
                     </li>
