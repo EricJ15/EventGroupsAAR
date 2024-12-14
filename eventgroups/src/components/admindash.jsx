@@ -96,6 +96,11 @@ export default function AdminDash() {
   return (
     <div>
       <div className="header">
+        <img 
+          src="https://storage.googleapis.com/a1aa/image/URnBX3wbNf24DShZ0Inbf8cMZ8hqCzMCOujwY22H6OwohgwTA.jpg" 
+          alt="Logo" 
+          className="header-logo" 
+        />
         <div className="title">Events Admin Dashboard</div>
       </div>
 
@@ -136,8 +141,9 @@ export default function AdminDash() {
               <button 
                 className="delete-btn delete"
                 onClick={() => handleDeleteEvent(event.id)}
+                aria-label="Delete event"
               >
-                Delete
+                <i className="bi bi-trash"></i>
               </button>
             </div>
           </div>

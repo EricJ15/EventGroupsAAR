@@ -13,7 +13,7 @@
 }
 .event-list h2 {
     text-align: center;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 20px;
     font-size: 28px;
     font-weight: 700;
@@ -68,7 +68,7 @@
     transform: scale(1.05);
 }
 .event-list-header {
-    background-color: #3F8CD3;
+    background-color: #17726d;
     padding: 20px;
     color: #fff;
     text-align: center;
