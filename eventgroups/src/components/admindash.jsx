@@ -101,7 +101,7 @@ export default function AdminDash() {
           alt="Logo" 
           className="header-logo" 
         />
-        <div className="title">Events Admin Dashboard</div>
+        <div className="title">Dumaguete Events</div>
       </div>
 
       <div className="container">

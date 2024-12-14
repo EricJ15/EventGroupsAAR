@@ -65,11 +65,13 @@ const EventList = () => {
             {error && <div className="error-message">{error}</div>}
             <ul>
                 {events.slice(0, visibleCount).map(event => (
-                    <li key={event.id}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={event.imageUrl} alt={event.name} style={{ width: '50px', height: '50px', borderRadius: '4px', marginRight: '10px' }} />
-                            <span>{event.name}</span>
-                        </div>
+                    <li key={event.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                        <img 
+                            src={event.imageUrl} 
+                            alt={event.title}
+                            style={{ width: '50px', height: '50px', borderRadius: '4px', marginRight: '10px' }} 
+                        />
+                        <span style={{ flex: 1 }}>{event.title}</span>
                         <div>
                             <button onClick={() => handleToggleInterest(event.id)}>
                                 {interestedEvents.has(event.id) ? 'Uninterested' : 'Interested'}
