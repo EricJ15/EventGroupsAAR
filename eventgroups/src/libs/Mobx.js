@@ -1,0 +1,10 @@
+export const observable = () => {};
+export const action = () => {};
+export const computed = () => {};
+export const makeObservable = () => {};
+export const runInAction = () => {};
+export const autorun = () => {};
+export const reaction = () => {};
+export const when = () => {};
+export const observe = () => {};
+export const intercept = () => {}; 
