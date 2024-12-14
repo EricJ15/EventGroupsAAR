@@ -23,7 +23,6 @@ const EventList = () => {
                         .map(([id, data]) => ({ id, ...data }))
                         .filter(event => event.isPublic === true);
                     
-                    // Sort events by date in descending order
                     eventsList.sort((a, b) => new Date(b.date) - new Date(a.date));
                     setEvents(eventsList);
                 } else {
@@ -36,7 +35,6 @@ const EventList = () => {
             }
         });
 
-        // Cleanup subscription
         return () => unsubscribe();
     }, []);
 

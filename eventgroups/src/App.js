@@ -9,14 +9,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Navigate to="/login" />} />*/}
         
         <Route path="/" element={<Admin />} />
         <Route path="/edit/:eventId" element={<AdminEdit />} />
         <Route path="/userdash" element={<UserDash />} />
         
-       {/* <Route path="/signup" element={<SignUp />} />*/}
-       {/* <Route path="/home" element={<Home />} />*/}
       </Routes>
     </Router>
   );

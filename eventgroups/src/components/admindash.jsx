@@ -33,7 +33,6 @@ export default function AdminDash() {
             }))
             .filter(event => event.isPublic === true);
           
-          // Sort events by date in descending order
           eventsList.sort((a, b) => new Date(b.date) - new Date(a.date));
           setEvents(eventsList);
         } else {
@@ -52,7 +51,6 @@ export default function AdminDash() {
       setLoading(false);
     });
 
-    // Cleanup subscription
     return () => unsubscribe();
   }, []);
 
@@ -81,7 +79,6 @@ export default function AdminDash() {
       try {
         const eventRef = ref(db, `events/${eventId}`);
         await remove(eventRef);
-        // The onValue listener will automatically update the UI
       } catch (error) {
         console.error("Error deleting event: ", error);
         alert('Failed to delete event. Please try again.');
