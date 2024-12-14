@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Admin from './components/admindash';
 
 import AdminEdit from './components/adminEdit';
+import UserDash from './components/userdash';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         
         <Route path="/" element={<Admin />} />
         <Route path="/edit/:eventId" element={<AdminEdit />} />
+        <Route path="/userdash" element={<UserDash />} />
         
        {/* <Route path="/signup" element={<SignUp />} />*/}
        {/* <Route path="/home" element={<Home />} />*/}
